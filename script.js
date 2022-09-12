@@ -13,6 +13,7 @@ const createProductImageElement = (imageSource) => {
   img.className = 'item__image';
   img.src = imageSource;
   return img;
+  
 };
 
 /**
