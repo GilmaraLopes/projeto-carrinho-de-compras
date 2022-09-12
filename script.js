@@ -13,7 +13,6 @@ const createProductImageElement = (imageSource) => {
   img.className = 'item__image';
   img.src = imageSource;
   return img;
-  
 };
 
 /**
@@ -73,4 +72,6 @@ const createCartItemElement = ({ id, title, price }) => {
   return li;
 };
 
-window.onload = () => { };
+window.onload = () => { 
+ createProductImageElement();
+};
