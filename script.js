@@ -54,7 +54,7 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  * @param {Element} product - Elemento do produto.
  * @returns {string} ID do produto.
  */
-const getIdFromProductItem = (product) => product.querySelector('span.id').innerText;
+// const getIdFromProductItem = (product) => product.querySelector('span.item_id').innerText;
 
 /**
  * Função responsável por criar e retornar um item do carrinho.
@@ -67,19 +67,44 @@ const getIdFromProductItem = (product) => product.querySelector('span.id').inner
 const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
-  li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  li.addEventListener('click', cartItemClickListener);
+  li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;  
+  // li.addEventListener('click', cartItemClickListener);
   return li;
 };
+
+const ol = document.getElementsByClassName('cart__items')[0];
+
+function addEventBottom(event) {
+  const itemSelected = document.querySelectorAll('.item__add');
+  console.log(itemSelected);
+  itemSelected.forEach((elemento) => {
+  elemento.addEventListener('click', async (e) => {
+    const pai = e.path[1];
+   const ID = pai.firstChild.innerText;
+   const teste = await fetchItem(ID);
+   ol.appendChild(createCartItemElement(teste));
+  });
+  });
+}
 
 async function addProduto() {
   const produto = await fetchProducts('computador');
   const result = produto.results;
-  const section1 = document.getElementsByClassName('items')[0];  
+  const section1 = document.getElementsByClassName('items')[0];
+  // console.log(section1);  
   for (let i = 0; i < result.length; i += 1) {
     section1.appendChild(createProductItemElement(result[i]));
 }
 }
+
+// function addToCart(event){
+//   const { target } = event;
+//   const outraLista = document.createElement('li');
+//   outraLista.innerText = target.
+// }
+
 window.onload = async () => { 
  await addProduto();
+ addEventBottom();
+//  createCartItemElement();
 };
