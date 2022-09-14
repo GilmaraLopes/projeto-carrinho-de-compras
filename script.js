@@ -64,26 +64,40 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  * @param {string} product.price - Preço do produto.
  * @returns {Element} Elemento de um item do carrinho.
  */
+function cartItemClickListener(event) {
+  event.target.remove();
+}
+
 const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
-  li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;  
-  // li.addEventListener('click', cartItemClickListener);
+  li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
+  li.addEventListener('click', cartItemClickListener);
   return li;
 };
 
 const ol = document.getElementsByClassName('cart__items')[0];
 
-function addEventBottom(event) {
+function btRemove() {
+  ol.innerHTML = '';
+  // const elemento = document.querySelectorAll('.cart__item');
+  // console.log(elemento);
+  //  elemento.removeChild(elemento);
+}
+
+const button = document.querySelector('.empty-cart');
+button.addEventListener('click', btRemove);
+
+function addEventBottom() {
   const itemSelected = document.querySelectorAll('.item__add');
-  console.log(itemSelected);
+  // console.log(itemSelected);
   itemSelected.forEach((elemento) => {
-  elemento.addEventListener('click', async (e) => {
-    const pai = e.path[1];
-   const ID = pai.firstChild.innerText;
-   const teste = await fetchItem(ID);
-   ol.appendChild(createCartItemElement(teste));
-  });
+    elemento.addEventListener('click', async (e) => {
+      const pai = e.path[1];
+      const ID = pai.firstChild.innerText;
+      const teste = await fetchItem(ID);
+      ol.appendChild(createCartItemElement(teste));
+    });
   });
 }
 
@@ -94,7 +108,7 @@ async function addProduto() {
   // console.log(section1);  
   for (let i = 0; i < result.length; i += 1) {
     section1.appendChild(createProductItemElement(result[i]));
-}
+  }
 }
 
 // function addToCart(event){
@@ -103,8 +117,8 @@ async function addProduto() {
 //   outraLista.innerText = target.
 // }
 
-window.onload = async () => { 
- await addProduto();
- addEventBottom();
-//  createCartItemElement();
+window.onload = async () => {
+  await addProduto();
+  addEventBottom();
+  //  createCartItemElement();
 };
