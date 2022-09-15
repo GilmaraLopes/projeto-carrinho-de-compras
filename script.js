@@ -66,19 +66,12 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  */
 
  const ol = document.getElementsByClassName('cart__items')[0];
- 
- const addLocalStorage = () => {
-  const listaCarrinho = ol;
-  localStorage.setItem('carrinho', listaCarrinho.innerHTML);
-  console.log(listaCarrinho.innerHTML);
-  // console.log(typeOf(listaCarrinho.innerHTML));
-  // const teste = JSON.stringify({ ol });
-  // console.log(teste);
-};
+
+  // saveCartItems(ol.innerHTML);  
 
 function cartItemClickListener(event) {
   event.target.remove();
-  addLocalStorage();
+  saveCartItems(ol.innerHTML);
 }
 
 const createCartItemElement = ({ id, title, price }) => {
@@ -115,7 +108,7 @@ const pegarItemLocalStorage = () => {
 
 function btRemove() {
   ol.innerHTML = '';
-  addLocalStorage();
+  saveCartItems(ol.innerHTML);
 }
 
 const button = document.querySelector('.empty-cart');
@@ -130,7 +123,7 @@ function addEventBottom() {
       const ID = pai.firstChild.innerText;
       const teste = await fetchItem(ID);
       ol.appendChild(createCartItemElement(teste));
-      addLocalStorage();
+      saveCartItems(ol.innerHTML);
     });
   });
 }

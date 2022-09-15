@@ -1,16 +1,9 @@
-const saveCartItems = () => {
-  //   const listaCarrinho = document.getElementsByClassName('cart__items')[0];
-  //   localStorage.setItem('carrinho', listaCarrinho);
-  //   console.log(listaCarrinho.innerHTML);
-  //   // console.log(typeOf(listaCarrinho.innerHTML));
-  //   // const teste = JSON.stringify({ ol });
-  //   // console.log(teste);
-  // };
-  
-  // const pegarItemLocalStorage = () => {
-  //   const lista = localStorage.getItem('carrinho');
-  //   // console.log(lista);
-  //   return lista;
+const saveCartItems = (param1) => {
+  // const ol = document.getElementsByClassName('cart__items')[0];
+
+  // const addLocalStorage = () => {
+  //   const listaCarrinho = ol;
+    localStorage.setItem('carrinho', param1);
   };
 
 if (typeof module !== 'undefined') {
