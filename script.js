@@ -64,9 +64,6 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  * @param {string} product.price - Preço do produto.
  * @returns {Element} Elemento de um item do carrinho.
  */
-function cartItemClickListener(event) {
-  event.target.remove();
-}
 
 const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
@@ -75,14 +72,48 @@ const createCartItemElement = ({ id, title, price }) => {
   li.addEventListener('click', cartItemClickListener);
   return li;
 };
-
 const ol = document.getElementsByClassName('cart__items')[0];
+// console.log(typeof (ol));
+
+// function addLocalStorage() {
+//   let dados = localStorage.getItem('dadosProdutos');
+//   console.log(dados);
+//   if (dados == null) {
+//     localStorage.setItem('dadosProdutos', '[]');
+//     dados = [];
+//   }
+// }
+
+const addLocalStorage = () => {
+  const listaCarrinho = ol;
+  localStorage.setItem('carrinho', listaCarrinho.innerHTML);
+  console.log(listaCarrinho.innerHTML);
+  // console.log(typeOf(listaCarrinho.innerHTML));
+  // const teste = JSON.stringify({ ol });
+  // console.log(teste);
+};
+
+function cartItemClickListener(event) {
+  event.target.remove();
+  addLocalStorage();
+}
+
+const pegarItemLocalStorage = () => {
+  const lista = localStorage.getItem('carrinho');
+  // console.log(lista);
+  ol.innerHTML = lista;
+  const LIS = ol.querySelectorAll('li');
+  LIS.forEach((element) => {
+    element.addEventListener('click', cartItemClickListener);
+  });
+};
+// 
+// console.log(addLocalStorage);
+// localStorage.getItem('ID');
 
 function btRemove() {
   ol.innerHTML = '';
-  // const elemento = document.querySelectorAll('.cart__item');
-  // console.log(elemento);
-  //  elemento.removeChild(elemento);
+  addLocalStorage();
 }
 
 const button = document.querySelector('.empty-cart');
@@ -97,6 +128,7 @@ function addEventBottom() {
       const ID = pai.firstChild.innerText;
       const teste = await fetchItem(ID);
       ol.appendChild(createCartItemElement(teste));
+      addLocalStorage();
     });
   });
 }
@@ -111,14 +143,9 @@ async function addProduto() {
   }
 }
 
-// function addToCart(event){
-//   const { target } = event;
-//   const outraLista = document.createElement('li');
-//   outraLista.innerText = target.
-// }
-
 window.onload = async () => {
   await addProduto();
   addEventBottom();
+  pegarItemLocalStorage();
   //  createCartItemElement();
 };
