@@ -65,18 +65,23 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  * @returns {Element} Elemento de um item do carrinho.
  */
 
- const ol = document.getElementsByClassName('cart__items')[0];
+ const ol = document.querySelector('.cart__items');
 
   // saveCartItems(ol.innerHTML);  
 
 function cartItemClickListener(event) {
   event.target.remove();
+  localStorage.removeItem('carrinho');
   saveCartItems(ol.innerHTML);
 }
 
+const clickAfterReload = () => ol.addEventListener('click', cartItemClickListener);
+clickAfterReload(); 
+
 const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
-  li.className = 'cart__item';
+  // li.className = 'cart__item';
+  // li.innerHTML = `<img class='cartimg' src='${thumbnail}`; 
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
   li.addEventListener('click', cartItemClickListener);
   return li;
@@ -93,26 +98,29 @@ const createCartItemElement = ({ id, title, price }) => {
 //   }
 // }
 
-const pegarItemLocalStorage = () => {
-  const lista = localStorage.getItem('carrinho');
-  // console.log(lista);
-  ol.innerHTML = lista;
-  const LIS = ol.querySelectorAll('li');
-  LIS.forEach((element) => {
-    element.addEventListener('click', cartItemClickListener);
-  });
-};
+// const pegarItemLocalStorage = () => {
+//   const lista = localStorage.getItem('carrinho');
+//   ol.innerHTML = lista;
+//   const LIS = ol.querySelectorAll('li');
+//   LIS.forEach((element) => {
+//     element.addEventListener('click', cartItemClickListener);
+//   });
+// };
 // 
 // console.log(addLocalStorage);
 // localStorage.getItem('ID');
 
 function btRemove() {
   ol.innerHTML = '';
-  saveCartItems(ol.innerHTML);
+  localStorage.removeItem('carrinho');
 }
 
 const button = document.querySelector('.empty-cart');
 button.addEventListener('click', btRemove);
+
+// function load() {
+//   return document.querySelector('.loading').remove;
+// }
 
 function addEventBottom() {
   const itemSelected = document.querySelectorAll('.item__add');
@@ -140,7 +148,10 @@ async function addProduto() {
 
 window.onload = async () => {
   await addProduto();
+  ol.innerHTML = getSavedCartItems();
   addEventBottom();
-  pegarItemLocalStorage();
+  
+  // pegarItemLocalStorage();
+  // load();
   //  createCartItemElement();
 };
