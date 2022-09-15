@@ -64,6 +64,9 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  * @param {string} product.price - Preço do produto.
  * @returns {Element} Elemento de um item do carrinho.
  */
+
+ const ol = document.getElementsByClassName('cart__items')[0];
+ 
  const addLocalStorage = () => {
   const listaCarrinho = ol;
   localStorage.setItem('carrinho', listaCarrinho.innerHTML);
@@ -85,7 +88,7 @@ const createCartItemElement = ({ id, title, price }) => {
   li.addEventListener('click', cartItemClickListener);
   return li;
 };
-const ol = document.getElementsByClassName('cart__items')[0];
+
 // console.log(typeof (ol));
 
 // function addLocalStorage() {
