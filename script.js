@@ -64,6 +64,19 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  * @param {string} product.price - Preço do produto.
  * @returns {Element} Elemento de um item do carrinho.
  */
+ const addLocalStorage = () => {
+  const listaCarrinho = ol;
+  localStorage.setItem('carrinho', listaCarrinho.innerHTML);
+  console.log(listaCarrinho.innerHTML);
+  // console.log(typeOf(listaCarrinho.innerHTML));
+  // const teste = JSON.stringify({ ol });
+  // console.log(teste);
+};
+
+function cartItemClickListener(event) {
+  event.target.remove();
+  addLocalStorage();
+}
 
 const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
@@ -83,20 +96,6 @@ const ol = document.getElementsByClassName('cart__items')[0];
 //     dados = [];
 //   }
 // }
-
-const addLocalStorage = () => {
-  const listaCarrinho = ol;
-  localStorage.setItem('carrinho', listaCarrinho.innerHTML);
-  console.log(listaCarrinho.innerHTML);
-  // console.log(typeOf(listaCarrinho.innerHTML));
-  // const teste = JSON.stringify({ ol });
-  // console.log(teste);
-};
-
-function cartItemClickListener(event) {
-  event.target.remove();
-  addLocalStorage();
-}
 
 const pegarItemLocalStorage = () => {
   const lista = localStorage.getItem('carrinho');
