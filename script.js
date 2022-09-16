@@ -67,12 +67,26 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
 
 const ol = document.querySelector('.cart__items');
 
-// saveCartItems(ol.innerHTML);  
+// saveCartItems(ol.innerHTML); 
+
+const subTotal = () => {
+  const item = document.querySelectorAll('.cart__item');
+  const precoTotal = document.querySelector('.total-price');
+  let total = 0;
+
+  for (let index = 0; index < item.length; index += 1) {
+    const precoFinal = item[index].innerText.split('$')[1];
+    total += parseFloat(precoFinal);
+  }
+precoTotal.innerText = `Total: $ ${(Math.round(total * 100) / 100)}`;
+};
 
 function cartItemClickListener(event) {
   event.target.remove();
   localStorage.removeItem('carrinho');
   saveCartItems(ol.innerHTML);
+  subTotal();
+
 }
 
 const clickAfterReload = () => ol.addEventListener('click', cartItemClickListener);
@@ -87,41 +101,14 @@ const createCartItemElement = ({ id, title, price }) => {
   return li;
 };
 
-// console.log(typeof (ol));
-
-// function addLocalStorage() {
-//   let dados = localStorage.getItem('dadosProdutos');
-//   console.log(dados);
-//   if (dados == null) {
-//     localStorage.setItem('dadosProdutos', '[]');
-//     dados = [];
-//   }
-// }
-
-// const pegarItemLocalStorage = () => {
-//   const lista = localStorage.getItem('carrinho');
-//   ol.innerHTML = lista;
-//   const LIS = ol.querySelectorAll('li');
-//   LIS.forEach((element) => {
-//     element.addEventListener('click', cartItemClickListener);
-//   });
-// };
-// 
-// console.log(addLocalStorage);
-// localStorage.getItem('ID');
-
 function btRemove() {
   ol.innerHTML = '';
   localStorage.removeItem('carrinho');
-  // subTotal();
+  subTotal();
 }
 
 const button = document.querySelector('.empty-cart');
 button.addEventListener('click', btRemove);
-
-// function load() {
-//   return document.querySelector('.loading').remove;
-// }
 
 function addEventBottom() {
   const itemSelected = document.querySelectorAll('.item__add');
@@ -133,6 +120,7 @@ function addEventBottom() {
       const teste = await fetchItem(ID);
       ol.appendChild(createCartItemElement(teste));
       saveCartItems(ol.innerHTML);
+      subTotal();
     });
   });
 }
@@ -152,9 +140,5 @@ window.onload = async () => {
   await addProduto();
   ol.innerHTML = getSavedCartItems();
   addEventBottom();
-  // await subTotal();
-
-  // pegarItemLocalStorage();
-  // load();
-  //  createCartItemElement();
+  subTotal();
 };
