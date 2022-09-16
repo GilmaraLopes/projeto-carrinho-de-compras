@@ -86,7 +86,6 @@ function cartItemClickListener(event) {
   localStorage.removeItem('carrinho');
   saveCartItems(ol.innerHTML);
   subTotal();
-
 }
 
 const clickAfterReload = () => ol.addEventListener('click', cartItemClickListener);
