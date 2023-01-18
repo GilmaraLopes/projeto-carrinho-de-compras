@@ -1,3 +1,7 @@
+:root{
+  --corDoMenu: rgba(65, 25, 127, 1);
+}
+
 * {
   box-sizing: border-box;
   font-family: Epilogue, sans-serif;
@@ -6,12 +10,12 @@
 }
 
 body {
-  background-color: rgb(246, 246, 246);
+  background-color: rgb(255, 255, 255);
 }
 
 .header {
   position: relative;
-  background-color: rgb(3, 52, 45);
+  background-color: var(--corDoMenu);
   display: flex;
   align-items: center;
   width: 100%;
@@ -19,7 +23,9 @@ body {
 }
 
 .container-title {
-  width: 80%;
+  display: flex;
+  /* width: 80%; */
+  flex-basis: 70%;
 }
 
 .title {
@@ -32,17 +38,19 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: rgb(10, 118, 79);
-  width: 40%;
+  background-color:  rgb(0, 213, 226);
+  justify-content: center;
+  /* width: 40%; */
   height: 100%;
   margin-left: 30px;
+  flex-basis: 33%;
 }
 
 .container-cartTitle span {
   z-index: 1;
 }
 
-.container-cartTitle:after {
+/* .container-cartTitle:after {
   content: '';
   position: absolute;
   top: 15px;
@@ -52,9 +60,9 @@ body {
   background: rgb(10, 118, 79);
   transform: skew(-45deg);
   z-index: 0;
-}
+} */
 
-.container-cartTitle:before {
+/* .container-cartTitle:before {
   content: '';
   position: absolute;
   top: 30px;
@@ -64,10 +72,11 @@ body {
   background: rgb(10, 118, 79);
   transform: skew(45deg);
   z-index: 0;
-}
+} */
 
 .container-cartTitle .cart__title {
-  color: white;
+  color:rgba(65, 25, 127, 1);
+
   font-size: 20px;
   padding-left: 35px;
   font-weight: 700;
@@ -89,17 +98,22 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   margin: 40px 0;
+
 }
 
 .item {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: auto;
   margin: 5px;
-  width: 200px;
+  width: 250px;
   border: 2px solid rgb(234, 234, 233);
-  border-radius: 5px;
+  border-radius: 10px;
   box-sizing: border-box;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+  padding: 10px;
 }
 
 .item .item__id {
@@ -115,16 +129,18 @@ body {
 }
 
 .item .item__image {
-  width: 100%;
+  width: 80%;
+  padding: 20px;
 }
 
 .item .item__add {
-  background-color: rgb(5, 52, 219);
+  background-color: rgba(0, 213, 226, 1);
   border: 0;
   cursor: pointer;
   margin: 0;
   padding: 10px;
-  color: white;
+  color: rgb(27, 54, 186);
+  border-radius: 10px;
 }
 
 .cart {
@@ -133,11 +149,22 @@ body {
   flex-flow: column wrap;
   background-color: rgb(241, 241, 238);
   height: 100vh;
+  box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.2);
 }
 
 .cart .cart__items {
   height: 500px;
   overflow-y: scroll;
+
+}
+
+.cart__item {
+  display: flex;
+  margin: 10px;
+  border: 1px solid rgb(197, 187, 187);
+  list-style: none;
+  padding: 10px;
+  box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.2);
 }
 
 .empty-cart {
@@ -146,4 +173,14 @@ body {
   margin: 0 auto;
   border: 2px solid rgb(5, 52, 219);
   background-color: rgb(249, 249, 246);
+}
+
+.total-price {
+  text-align: center;
+  margin: 10px 0px ;
+}
+
+.cartimg{
+ border-radius: 50%;
+ padding: 10px;
 }
